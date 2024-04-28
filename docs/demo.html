@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/echarts/4.3.0-rc.1/echarts.min.js"></script>
+	<script src="./index.js"></script>
+	<style>
+		#app {
+			position: absolute;
+			transform: translate(600px, 400px) rotate(90deg);
+			width: 1px;
+			height: 1px;
+			background-color: #00f;
+		}
+
+		#app div {
+			display: flex;
+			align-items: flex-end;
+			height: 300px;
+			width: 20px;
+			position: absolute;
+			/* transform: translate(100px); */
+		}
+
+		#action {
+			position: fixed;
+			top: 20%;
+			right: 0;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			padding: 10px;
+			width: 100px;
+			min-height: 200px;
+			background-color: #fff;
+			box-shadow: 0px 0px 2px #01a9f4;
+			border-radius: 4px;
+		}
+
+		#action button {
+			padding: 10px 20px;
+			border: 0;
+			outline: none;
+			margin-bottom: 10px;
+			color: #fff;
+			background-color: #03a9f4;
+			border-radius: 4px;
+
+		}
+
+		#action button:last-child {
+			margin-bottom: 0;
+		}
+	</style>
+</head>
+
+<body>
+
+
+	<div id="action">
+		<button class="play" onclick="createAv()">创建</button>
+		<button class="play" onclick="playAv()">播放</button>
+		<button class="play" onclick="suspendAv()">暂停</button>
+		<button class="play" onclick="stopAv()">销毁</button>
+
+		<p class="timeshow"></p>
+	</div>
+
+	<div id="main" style="width: 800px;height:500px;"></div>
+
+	<div id="app">
+
+	</div>
+
+	<script>
+		// 基于准备好的dom，初始化echarts实例
+
+		function getOption(data, type = 3) {
+			if (type === 1)
+				option = {
+					animation: false,
+					title: {
+						left: 'center',
+						text: '音乐可视化',
+					},
+					xAxis: {
+						show: true,
+						data: data,
+					},
+					yAxis: {
+						show: false,
+						axisLine: {
+							show: false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLabel: {
+							textStyle: {
+								color: '#999'
+							}
+						}
+					},
+
+					series: [
+						{ // For shadow
+							type: 'bar',
+							itemStyle: {
+								normal: { color: 'rgba(0,0,0,0.05)' }
+							},
+							barGap: '-2%',
+							barCategoryGap: '2%',
+							data: data,
+							animation: true
+						},
+						{
+							animation: false,
+							type: 'bar',
+							itemStyle: {
+								normal: {
+									color: new echarts.graphic.LinearGradient(
+										0, 0, 0, 1,
+										[
+											{ offset: 0, color: '#a54' },
+											{ offset: 0.5, color: '#a3aa88' },
+											{ offset: 1, color: '#83bff6' }
+										]
+									)
+								},
+
+							},
+							data: data,
+						}
+					]
+				};
+			if (type === 2)
+				option = {
+
+					// Make gradient line here
+					animation: false,
+					title: [{
+						left: 'center',
+						text: 'Gradient along the x axis'
+					}],
+					tooltip: {
+						trigger: 'axis'
+					},
+					xAxis: [{
+						data: data,
+
+					}],
+					yAxis: [{
+						splitLine: { show: false }
+					}],
+					series: [{
+						animation: false,
+						type: 'line',
+						showSymbol: false,
+						data: data,
+					}]
+				};
+			if (type === 3)
+				option = {
+					animation: false,
+					title: {
+						left: 'center',
+						text: '音乐可视化',
+					},
+					xAxis: {
+						type: 'category',
+						boundaryGap: false,
+					},
+					yAxis: {
+						show: false,
+						type: 'value',
+						boundaryGap: [0, '10%']
+					},
+					series: [
+						{
+							animation: false,
+							name: '模拟数据',
+							type: 'line',
+							smooth: true,
+							symbol: 'none',
+							sampling: 'average',
+							itemStyle: {
+								color: 'rgb(255, 70, 131)'
+							},
+							areaStyle: {
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+									offset: 0,
+									color: 'rgb(255, 158, 68)'
+								}, {
+									offset: 1,
+									color: 'rgb(255, 70, 131)'
+								}])
+							},
+							data: data,
+						}
+					]
+				};
+
+			return option;
+		}
+
+		function getElenemt(data) {
+			const angle = (360 / data.length);
+
+			return data.map((item, index) => {
+				const el = document.createElement('div');
+				const elp = document.createElement('p');
+
+				elp.style.width = "4px";
+				elp.style.height = (item / 2) + "px";
+				elp.style.backgroundColor = "#f99";
+				el.append(elp);
+				el.style.transform = `rotate(${angle * (index + 1)}deg) translate(${300}px) rotate(90deg)`;
+
+				return el;
+			});
+		}
+	let av;
+	function createAv (){
+		av = new AudioVisualization({
+			url: './Lemon.mp3',
+			// url: 'http://m10.music.126.net/20190928224451/f5bc80664ab64ba0e7a39c6e85657842/ymusic/24bd/e9e1/2b6c/e2084de498685dcea42a7bb4dc8a8f93.mp3',
+			loop: false,
+		});
+		playAv()
+	}
+		console.log(av);
+
+		var myChart = echarts.init(document.getElementById('main'));
+		const app = document.querySelector('#app');
+
+
+		function playAv() {
+			console.log('playAv');
+			av.play(function ({ frequency, currentTime, audiostate }) {
+
+				// console.log(currentTime);
+
+				document.querySelector('.timeshow').innerHTML = `进度: ${currentTime.toFixed(3)}<br/>状态：${audiostate}`;
+
+				const option = this.getOption([...Array.from(frequency).reverse(), ...frequency], 3);
+				myChart.setOption(option);
+
+				roundDom(app, frequency);
+
+			});
+		}
+
+		function stopAv() {
+			console.log('stop');
+			av.destroy()
+			if(av){
+				myChart.clear();
+				av = null;
+			}
+		}
+		function suspendAv() {
+			console.log('stop');
+			av.suspend();
+		}
+
+
+		function roundDom(el, data) {
+
+			const f = document.createDocumentFragment();
+			f.append.apply(f, getElenemt([...Array.from(data).reverse(), ...Array.from(data)]))
+
+			app.innerHTML = "";
+			app.append(f);
+		}
+
+	</script>
+</body>
+
+</html>
