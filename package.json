@@ -1,5 +1,5 @@
 {
-  "name": "audio-visualization",
+  "name": "audio-visualization-pro",
   "version": "0.1.1",
   "description": "音乐可视化",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "visualization"
   ],
   "typings": "types/index.d.ts",
-  "author": "bucai",
+  "author": "龚箭",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.13.14",
