@@ -1,5 +1,5 @@
 (function () {
-  function AudioVisualization ({ url, loop = false }) {
+  function AudioVisualizationPro ({ url, loop = false }) {
     // 音乐地址
     /** @type {String} */
     this.url = url;
@@ -24,7 +24,7 @@
     this.init();
   }
 
-  AudioVisualization.prototype = {
+  AudioVisualizationPro.prototype = {
     get currentTime () {
       return this.audioContext && this.audioContext.currentTime;
     },
@@ -173,13 +173,13 @@
   };
 
   if (typeof window !== 'undefined') {
-    window.AudioVisualization = AudioVisualization;
+    window.AudioVisualizationPro = AudioVisualizationPro;
   } else if (typeof global !== 'undefined') {
-    global.AudioVisualization = AudioVisualization;
+    global.AudioVisualizationPro = AudioVisualizationPro;
   }
 
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    module.exports = AudioVisualization;
+    module.exports = AudioVisualizationPro;
   }
 
 })();

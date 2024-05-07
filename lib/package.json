@@ -1,0 +1,14 @@
+{
+  "name":"audio-visualization-pro",
+  "version":"1.0.0",
+  "description":"音频可视化工具",
+  "private": false,
+  "author":"龚箭" ,
+  "license":"MIT",
+  "keywords":[
+    "音频可视化工具",
+    "web音频分析工具",
+    "audio可视化"
+  ],
+  "main":"index.js"
+}
