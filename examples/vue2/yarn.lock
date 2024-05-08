@@ -2017,6 +2017,11 @@ at-least-node@^1.0.0:
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
+audio-visualization-pro@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/audio-visualization-pro/-/audio-visualization-pro-1.0.0.tgz#09cd5431c2248d9680f507caa0d2bffb6d257adc"
+  integrity sha512-P7OSimixwBER4nx5mi9DGhT+PzGa8bG2+YIPlwUt1/XiW5eZsCyRii/jHsrUMeG7PvCFG4C1aVobsH4W1Qqw3Q==
+
 autoprefixer@^10.2.4:
   version "10.4.19"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.19.tgz#ad25a856e82ee9d7898c59583c1afeb3fa65f89f"
